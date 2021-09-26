@@ -9,8 +9,8 @@ using weatherapi.Models;
 namespace weatherapi.Migrations
 {
     [DbContext(typeof(WhetherContext))]
-    [Migration("20210926210310_up1")]
-    partial class up1
+    [Migration("20210926231450_up2")]
+    partial class up2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

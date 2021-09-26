@@ -13,8 +13,8 @@ namespace weatherapi.Application.Handlers
 {
     public class LoginHandler : IRequestHandler<LoginCommand, string>
     {
-        private readonly IdentityContext _context;
-        public LoginHandler(IdentityContext context)
+        private readonly WhetherContext _context;
+        public LoginHandler(WhetherContext context)
         {
             _context = context;
         }

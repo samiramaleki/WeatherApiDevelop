@@ -59,7 +59,7 @@ namespace weatherapi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "weatherapi", Version = "v1" });
             });
 
-            services.AddDbContext<IdentityContext>
+            services.AddDbContext<WhetherContext>
               (options => options.UseSqlServer(Configuration["ConnectionStrings:UniConnection"]));
         }
 

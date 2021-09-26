@@ -7,7 +7,7 @@ using weatherapi.Models;
 
 namespace weatherapi.Migrations
 {
-    [DbContext(typeof(IdentityContext))]
+    [DbContext(typeof(WhetherContext))]
     partial class IdentityContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
@@ -40,6 +40,24 @@ namespace weatherapi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("weatherapi.Models.Weather", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TemperatureC")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Weathers");
                 });
 #pragma warning restore 612, 618
         }

@@ -9,8 +9,8 @@ using weatherapi.Models;
 namespace weatherapi.Migrations
 {
     [DbContext(typeof(WhetherContext))]
-    [Migration("20210926210310_up1")]
-    partial class up1
+    [Migration("20210926232008_up3")]
+    partial class up3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,6 +42,24 @@ namespace weatherapi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("weatherapi.Models.Weather", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TemperatureC")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Weathers");
                 });
 #pragma warning restore 612, 618
         }

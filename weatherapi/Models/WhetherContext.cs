@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 
 namespace weatherapi.Models
 {
-    public class IdentityContext : DbContext
+    public class WhetherContext : DbContext
     {
-        public IdentityContext()
+        public WhetherContext()
         {
 
         }
 
         public DbSet<User> Users { get; set; }
-        public IdentityContext(DbContextOptions<IdentityContext> dbContextOptions)
+        public DbSet<Weather> Weathers { get; set; }
+        public WhetherContext(DbContextOptions<WhetherContext> dbContextOptions)
           : base(dbContextOptions)
         {
 

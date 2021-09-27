@@ -35,8 +35,9 @@ namespace weatherapi.Services
             Stream responseBody = await response.Content.ReadAsStreamAsync();
 
             var weatherApiDto = await JsonSerializer.DeserializeAsync<CurrentWeatherInformation>(responseBody);
+
             //Rabbi mq
-            var messageBody = Encoding.UTF8.GetBytes(weatherApiDto.ToString());
+            var messageBody = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(weatherApiDto));
             var factory = new ConnectionFactory() { HostName = "localhost" };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();

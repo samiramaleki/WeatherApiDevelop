@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using weatherapi.Application.Commands;
 using weatherapi.DTOs;
 using weatherapi.Services;
-using static weatherapi.Services.Bootstrapper;
 
 namespace weatherapi.Controllers
 {

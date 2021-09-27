@@ -25,18 +25,8 @@ namespace WeatherApiClient
 
         private static void Consumer_Received(object sender, BasicDeliverEventArgs e)
         {
-            try
-            {
-                var c = e.Body.ToArray();
-                var message = Encoding.UTF8.GetString(e.Body.ToArray());
-                Console.WriteLine(message);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-
+            var message = Encoding.UTF8.GetString(e.Body.ToArray());
+            Console.WriteLine(message);
         }
     }
 }

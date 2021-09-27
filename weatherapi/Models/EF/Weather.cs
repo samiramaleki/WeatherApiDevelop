@@ -9,6 +9,6 @@ namespace weatherapi.Models
     {
         public int Id { get; set; }
         public string City { get; set; }
-        public int TemperatureC { get; set; }
+        public float TemperatureC { get; set; }
     }
 }

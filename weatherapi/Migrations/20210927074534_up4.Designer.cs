@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using weatherapi.Models;
 
 namespace weatherapi.Migrations
 {
     [DbContext(typeof(WhetherContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20210927074534_up4")]
+    partial class up4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

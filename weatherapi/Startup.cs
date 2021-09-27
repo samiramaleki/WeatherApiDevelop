@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using weatherapi.Models;
 using MediatR;
+using weatherapi.Services;
 
 namespace weatherapi
 {
@@ -36,11 +37,13 @@ namespace weatherapi
             services.AddControllers();
             services.AddMediatR(typeof(Startup));
 
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
+
           .AddJwtBearer(x =>
           {
               x.RequireHttpsMetadata = false;
@@ -57,8 +60,54 @@ namespace weatherapi
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "weatherapi", Version = "v1" });
+
+                //var securitySchema = new OpenApiSecurityScheme
+                //{
+                //    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                //    Name = "Authorization",
+                //    In = ParameterLocation.Header,
+                //    Type = SecuritySchemeType.Http,
+                //    Scheme = "bearer",
+                //    Reference = new OpenApiReference
+                //    {
+                //        Type = ReferenceType.SecurityScheme,
+                //        Id = "Bearer"
+                //    }
+                //};
+
+                //c.AddSecurityDefinition("Bearer", securitySchema);
+
+                //var securityRequirement = new OpenApiSecurityRequirement
+                //{
+                //    { securitySchema, new[] { "Bearer" } }
+                //};
+
+                //c.AddSecurityRequirement(securityRequirement);
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Header,
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Description = " Authorization header using the Bearer scheme"
+                });
+                //c.OperationFilter<BranchHeaderFilter>();
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
+
             });
 
+            services.AddAuthorization();
             services.AddDbContext<WhetherContext>
               (options => options.UseSqlServer(Configuration["ConnectionStrings:UniConnection"]));
         }
@@ -76,8 +125,9 @@ namespace weatherapi
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

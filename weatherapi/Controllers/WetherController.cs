@@ -13,7 +13,7 @@ namespace weatherapi.Controllers
 {
     [ApiController]
     [Route("api/wether")]
-    [Authorize]
+    //[Authorize]
     public class WetherController : ControllerBase
     {
         private readonly IWheatherService _wheatherService;

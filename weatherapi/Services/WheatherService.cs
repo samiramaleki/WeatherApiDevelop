@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using weatherapi.DTOs;
 using weatherapi.Models;
 using MediatR;
+using Microsoft.Extensions.Logging;
 
 namespace weatherapi.Services
 {
@@ -17,16 +18,16 @@ namespace weatherapi.Services
     {
         private readonly string APIKey = "4c8aa095e62b406eb71211822202311";
         private HttpClient _client;
-        // private readonly IMediator _mediator;
+        private readonly ILogger<WheatherService> _logger;
 
-        public WheatherService()
+        public WheatherService(ILogger<WheatherService> logger)
         {
-            //_client = httpClient;
-            //_client.BaseAddress = new Uri("http://api.weatherapi.com/v1/current.json");
-            //  _mediator = mediator;
+            _logger = logger;
         }
         public async Task<CurrentWeatherInformation> GetAsync(string cityName)
         {
+            //try
+            //{
             _client = new HttpClient();
             _client.BaseAddress = new Uri("http://api.weatherapi.com/v1/current.json");
 
@@ -45,7 +46,15 @@ namespace weatherapi.Services
             channel.QueueDeclare("Qwether", durable: false, exclusive: false, autoDelete: false, arguments: null);
 
             channel.BasicPublish(exchange: "", routingKey: "Qwether", basicProperties: null, body: messageBody);
+            _logger.LogInformation("WetherService", JsonSerializer.Serialize(weatherApiDto));
             return weatherApiDto;
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError("There is error", ex);
+            //}
+
+
         }
     }
 }

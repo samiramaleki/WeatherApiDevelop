@@ -110,6 +110,7 @@ namespace weatherapi
             services.AddAuthorization();
             services.AddDbContext<WhetherContext>
               (options => options.UseSqlServer(Configuration["ConnectionStrings:UniConnection"]));
+            services.AddScoped<IWheatherService, WheatherService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
